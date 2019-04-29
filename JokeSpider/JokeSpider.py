@@ -6,13 +6,13 @@ import time
 
 def getHTML(url):
     headers = {
-        'User-Agent': 'User-Agent:Mozilla/35.0 Chrome/ 74.0.3729.108 '}
+        'User-Agent': 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.108 Safari/537.36 '}
     req = urllib.request.Request(url, headers=headers)
     return urllib.request.urlopen(req).read()
 
 def creatSoup(url):
     html_text = getHTML(url)
-    soup_0 = BeautifulSoup(html_text, 'html5lib')
+    soup_0 = BeautifulSoup(html_text, 'html.parser')
     return soup_0
 
 def creatExcelAndSheet(SheetName):
@@ -58,4 +58,4 @@ while i < 24:
         k += 1
 
 summaryAllContent(i, k, url)
-file.save("C:/Users/Administrator/Desktop/笑话爬虫.xls")
+file.save("C:/Users/dell/Desktop/笑话爬虫.xlsx")
