@@ -12,7 +12,7 @@ def getHTML(url):
 
 def creatSoup(url):
     html_text = getHTML(url)
-    soup_0 = BeautifulSoup(html_text, 'html.parser')
+    soup_0 = BeautifulSoup(html_text, 'lxml')
     return soup_0
 
 def creatExcelAndSheet(sheetName):
@@ -31,7 +31,7 @@ def summaryAllContent(a,b,url):
     print("------------------------------")
 
 def getEachContent(eachContent):
-    a = eachContent.select("div")[0]
+    a = eachContent.select("div")
     b = a.select("span")[0]
     sss = " "
     for s in b.strings:
@@ -43,9 +43,10 @@ sheet,file = creatExcelAndSheet("data")
 i = 1
 k = 1
 while i < 24:
-    url = "https://www.qiushibaike.com/8hr/page/" + str(i) + "/?s=4991834"
+    url = "https://www.qiushibaike.com/textnew/" + str(i)
     soup = creatSoup(url)
-    a_soup = soup.select("a[class=content-block]") # 根据关键字取得按list存放的内容
+    a_soup = soup.select("div[class=content] span") # 根据关键字取得按list存放的内容
+    print(a_soup)
     contentLen = len(a_soup)
     print("Info:第%d页有%d个笑话" % (i, contentLen))
 
