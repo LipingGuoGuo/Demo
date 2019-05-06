@@ -38,8 +38,6 @@ def getEachContent(eachContent):
     return sss
 
 # sheet,file = creatExcelAndSheet("data")
-
-
 i = 1
 k = 1
 while i < 5:

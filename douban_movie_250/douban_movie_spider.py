@@ -1,5 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+# import os
+#
+# path = os.chdir("./douban_photo")
+# path1 = os.getcwd()
 url = "https://movie.douban.com/top250"
 
 '''
@@ -25,6 +29,6 @@ for url in urls:
         i += 1
         fileName = str(i)+ "." + data["title"][0]+ " "+ data["rate"]+"分.jpg"
         pic = requests.get(data["img"])
-        with open("C:/Users/dell/Desktop/file/douban_test/" + fileName,"wb") as photo:
+        with open("./douban_photo/" + fileName, "wb") as photo:
             photo.write(pic.content)
         print(data)
