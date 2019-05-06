@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 # import os
-#
+
 # path = os.chdir("./douban_photo")
 # path1 = os.getcwd()
-url = "https://movie.douban.com/top250"
+# url = "https://movie.douban.com/top250"
 
 '''
 https://movie.douban.com/top250?start=25&filter=
