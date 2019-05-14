@@ -6,6 +6,10 @@ grtHTMLText()
 2.提取网页内容中信息到合适的数据结构
 fillUnivList()
 3.利用数据结构展示并输出结果
+
+关于对齐
+中文对其问题的解决
+采用中文字符的空格填充 chr(12288)
 printUnivList()
 """
 import requests
@@ -31,13 +35,18 @@ def fillUnivList(ulist, html):
             '''
             .string 取标签的字符串，tr('td') 也就是tr.find_all('td')
             '''
-            ulist.append([tds[0].string, tds[1].string, tds[2].string])
+            ulist.append([tds[0].string, tds[1].string, tds[3].string])
 
 def printUnivList(ulist, num):
-    print("{:^10}\t{:^6}\t{:^10}".format("排名", "学校名称", "总分"))
+    """
+    10表示字符串的宽度
+    宽度不够时，采用中文空格填充，中文空格的编码为chr(12288)
+    """
+    tplt = "{0:{3}^10}\t{1:{3}^10}\t{2:^10}"
+    print(tplt.format("排名", "学校名称", "总分", chr(12288)))
     for i in range(num):
         u = ulist[i]
-        print("{:^10}\t{:^6}\t{:^10}".format(u[0], u[1], u[2]))
+        print(tplt.format(u[0], u[1],u[2], chr(12288)))
     # print("Suc" + str(num))
 
 # def main():
@@ -53,4 +62,4 @@ if __name__ == "__main__":
     html = getHTMLText(url)
     # print(getHTMLText(url))
     fillUnivList(uinfo, html)
-    printUnivList(uinfo, 20)
+    printUnivList(uinfo, 3)
