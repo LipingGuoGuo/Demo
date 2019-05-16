@@ -18,7 +18,7 @@ import requests
 import re
 def getHTMLText(url):
     try:
-        r = requests.get(url,timeout=30)
+        r = requests.get(url)
         r.raise_for_status()
         r.encoding = r.apparent_encoding
         return r.text
@@ -28,25 +28,30 @@ def getHTMLText(url):
 def parsePage(ilt,html):
     try:
         '''
-        
+        正则表达式的含义是 匹配双引号内遗传由若干数字和小数点组成的字符
+        列表类型
         '''
         plt = re.findall(r'\"view_price\"\:\"{\d\.}*\"', html)
         """
         *?最小匹配
+        正则表达式的含义是 非贪婪匹配raw_string对应的值也就是双引号内任意字符串
         """
-        tlt = re.findall(r'\"raw_title\"\:\".*?\"', html)
 
+        tlt = re.findall(r'\"raw_title\"\:\".*?\"', html)
+        for i in range(len(plt)):
+            price = eval(plt[i].split(':')[1])
+            title = eval(tlt[i].split(':')[1])
+            ilt.append([price, title])
+    except:
+        print("")
+
+def printGoodList(ilt):
     tplt = "{:4}\t{:8}\t{:16}"
     print(tplt.format("序号", "价格", "商品名称"))
     count = 0
     for g in ilt:
         count = count + 1
-
-
-    print("")
-
-def printGoodList(ilt):
-    print("")
+        print(tplt.format(count, g[0], g[1]))
 
 def main():
     goods = "书包"
@@ -57,7 +62,7 @@ def main():
         try:
             url = start_url + "&s=" + str(44*i)
             html = getHTMLText(url)
-            parsePage(infoList,html)
+            parsePage(infoList, html)
         except:
             continue
     printGoodList(infoList)
